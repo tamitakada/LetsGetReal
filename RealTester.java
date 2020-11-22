@@ -6,6 +6,7 @@ public class RealTester {
 
   public static void main(String[] args) {
     testEquals();
+    testAdd();
   }
 
   public static void testEquals() {
@@ -44,7 +45,41 @@ public class RealTester {
     printResults(testResults, "Test Equals");
   }
 
-  
+  public static void testAdd() {
+    boolean[] testResults = new boolean[4];
+
+    RealNumber one = new RealNumber(0);
+    RealNumber two = null;
+
+    testResults[0] = (one.add(two) == null);
+
+    one = new RealNumber(1212.222);
+    two = new RealNumber(-943.00000001);
+    testResults[1] = (one.add(two).getValue() == 269.22199999);
+
+    one = new RealNumber(-0.04);
+    two = new RealNumber(-0.001);
+
+    testResults[2] = (one.add(two).getValue() == -0.041);
+
+    for (int i = 0; i < 100; i++) {
+      Random rng = new Random();
+      double first = rng.nextDouble();
+      double second = rng.nextDouble();
+
+      RealNumber three = new RealNumber(first);
+      RealNumber four = new RealNumber(second);
+
+      if ((first + second) != (three.add(four).getValue())) {
+        testResults[3] = false;
+        break;
+      } else if (i == 99) {
+        testResults[3] = true;
+      }
+    }
+
+    printResults(testResults, "Test Add");
+  }
 
   public static void printResults(boolean[] results, String testName) {
     for (int i = 0; i < results.length; i++) {
