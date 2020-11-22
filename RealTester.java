@@ -8,6 +8,7 @@ public class RealTester {
     testEquals();
     testAdd();
     testMultiply();
+    testDivide();
   }
 
   public static void testEquals() {
@@ -117,6 +118,47 @@ public class RealTester {
     }
 
     printResults(testResults, "Test Multiply");
+  }
+
+  public static void testDivide() {
+    boolean[] testResults = new boolean[5];
+
+    RealNumber one = new RealNumber(0);
+    RealNumber two = null;
+
+    testResults[0] = (one.divide(two) == null);
+
+    one = new RealNumber(1212.222);
+    two = new RealNumber(0);
+
+    testResults[1] = (one.divide(two) == null);
+
+    one = new RealNumber(0);
+    two = new RealNumber(-0.022101);
+
+    testResults[2] = (one.divide(two).getValue() == 0.0);
+
+    one = new RealNumber(-102);
+    two = new RealNumber(-5.432);
+    testResults[3] = (one.divide(two).getValue() == 18.777614138438878);
+
+    for (int i = 0; i < 100; i++) {
+      Random rng = new Random();
+      double first = rng.nextDouble() + 1;
+      double second = rng.nextDouble() + 1;
+
+      RealNumber three = new RealNumber(first);
+      RealNumber four = new RealNumber(second);
+
+      if ((first / second) != (three.divide(four).getValue())) {
+        testResults[4] = false;
+        break;
+      } else if (i == 99) {
+        testResults[4] = true;
+      }
+    }
+
+    printResults(testResults, "Test Divide");
   }
 
   public static void printResults(boolean[] results, String testName) {
