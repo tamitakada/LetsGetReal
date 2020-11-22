@@ -5,6 +5,7 @@ public class RationalTester {
 
   public static void main(String[] args) {
     testCreationAndGets();
+    testReciprocals();
   }
 
   public static void testCreationAndGets() {
@@ -35,6 +36,41 @@ public class RationalTester {
     testResults[11] = (two.getDenominator() == -100);
 
     printResults(testResults, "Test Creation & Gets");
+  }
+
+  public static void testReciprocals() {
+    boolean[] testResults = new boolean[5];
+
+    RationalNumber one = new RationalNumber(0, 1);
+    RationalNumber two = new RationalNumber(1, 0);
+
+    testResults[0] = (one.reciprocal().getValue() == 0);
+    testResults[1] = (two.reciprocal().getValue() == 0);
+
+    one = new RationalNumber(5, -2);
+    two = new RationalNumber(-0, -100);
+
+    testResults[2] = (one.reciprocal().getValue() == -0.4);
+    testResults[3] = (two.reciprocal().getValue() == 0);
+
+    for (int i = 0; i < 100; i++) {
+      Random rng = new Random();
+      int first = rng.nextInt();
+      int second = rng.nextInt();
+      RationalNumber ratNum = new RationalNumber(first, second);
+
+      double expected = 0.0;
+      if (first != 0) expected = (Double.valueOf(second) / Double.valueOf(first));
+
+      if (ratNum.reciprocal().getValue() != expected) {
+        testResults[4] = false;
+        break;
+      } else if (i == 99) {
+        testResults[4] = true;
+      }
+    }
+
+    printResults(testResults, "Test Reciprocals");
   }
 
   public static void printResults(boolean[] results, String testName) {
