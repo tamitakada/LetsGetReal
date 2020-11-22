@@ -23,9 +23,10 @@ public class RealNumber{
       return (other.getValue() == 0 && getValue() == 0);
     }
 
-    double difference = Math.abs(getValue() - other.getValue()) / getValue();
+    double difference = Math.abs(getValue() - other.getValue())
+                          / ((getValue() + other.getValue()) / 2) * 100;
 
-    return difference <= 0.00001;
+    return Math.abs(difference) <= 0.001;
   }
 
   /*
@@ -35,7 +36,7 @@ public class RealNumber{
   public RealNumber add(RealNumber other){
      //other can be ANY RealNumber, including a RationalNumber
      //or other subclasses of RealNumber (that aren't written yet)
-     return null;
+     return (getValue() + other.getValue());
   }
 
   /*
@@ -43,7 +44,7 @@ public class RealNumber{
   *the product of this and the other
   */
   public RealNumber multiply(RealNumber other){
-        return null;
+        return (getValue() * other.getValue());
   }
 
   /*
