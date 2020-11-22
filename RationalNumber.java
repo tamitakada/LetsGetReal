@@ -67,6 +67,8 @@ public class RationalNumber extends RealNumber
   private static int gcd(int a, int b){
     /*use euclids method or a better one*/
     //http://sites.math.rutgers.edu/~greenfie/gs2004/euclid.html
+    if ((a == 0) || (b == 0)) return 0;
+
     int bigger = a;
     int smaller = b;
     if (b > a) {
@@ -89,14 +91,26 @@ public class RationalNumber extends RealNumber
   *reduced after construction.
   */
   private void reduce(){
-
+    int gcf = gcd(getNumerator(), getDenominator());
+    if ((gcf != 0) && (gcf != 1)) {
+      numerator = (getNumerator() / gcf);
+      denominator = (getDenominator() / gcf);
+    }
   }
   /******************Operations Return a new RationalNumber!!!!****************/
   /**
   *Return a new RationalNumber that is the product of this and the other
   */
   public RationalNumber multiply(RationalNumber other){
-    return null;
+    reduce();
+    other.reduce();
+    int nume = getNumerator() * (other.getNumerator());
+    int deno = getDenominator() * (other.getDenominator());
+
+    RationalNumber product = new RationalNumber(nume, deno);
+    product.reduce();
+
+    return product;
   }
 
   /**

@@ -8,6 +8,7 @@ public class RationalTester {
     testReciprocals();
     testEquals();
     testString();
+    testMultiply();
   }
 
   public static void testCreationAndGets() {
@@ -144,6 +145,30 @@ public class RationalTester {
     testResults[5] = two.toString().equals("4/3");
 
     printResults(testResults, "Test toString");
+  }
+
+  public static void testMultiply() {
+    boolean[] testResults = new boolean[5];
+
+    RationalNumber one = new RationalNumber(0, 1);
+    RationalNumber two = new RationalNumber(1, 0);
+
+    testResults[0] = (one.multiply(two).getValue() == 0);
+
+    one = new RationalNumber(5, -2);
+    two = new RationalNumber(10, 20);
+
+    RationalNumber result = one.multiply(two);
+    testResults[1] = (result.getValue() == -1.25);
+    testResults[2] = (result.getNumerator() == 5);
+    testResults[3] = (result.getDenominator() == -4);
+
+    one = new RationalNumber(3, 19);
+    two = new RationalNumber(0, 43);
+
+    testResults[4] = (one.multiply(two).getValue() == 0);
+
+    printResults(testResults, "Test multiply");
   }
 
   public static void printResults(boolean[] results, String testName) {
