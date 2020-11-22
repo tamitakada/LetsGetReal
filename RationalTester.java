@@ -11,6 +11,7 @@ public class RationalTester {
     testMultiply();
     testDivide();
     testAdd();
+    testSubtract();
   }
 
   public static void testCreationAndGets() {
@@ -246,6 +247,26 @@ public class RationalTester {
   }
 
   public static void testSubtract() {
+    boolean[] testResults = new boolean[6];
+
+    RationalNumber one = new RationalNumber(0, 1);
+    RationalNumber two = new RationalNumber(1, 0);
+
+    testResults[0] = (one.subtract(two).getValue() == 0);
+
+    one = new RationalNumber(5, -2);
+    two = new RationalNumber(4, 10);
+
+    RationalNumber result = one.subtract(two);
+    testResults[1] = (result.getValue() == -2.9);
+    testResults[2] = (result.getNumerator() == 29);
+    testResults[3] = (result.getDenominator() == -10);
+
+    one = new RationalNumber(63, 2);
+    two = new RationalNumber(77, 1);
+
+    testResults[4] = (one.subtract(two).getValue() == -45.5);
+
     for (int i = 0; i < 100; i++) {
       Random rng = new Random();
 
@@ -257,17 +278,20 @@ public class RationalTester {
       int fourth = rng.nextInt(50) + 1;
       RationalNumber ratNumTwo = new RationalNumber(third, fourth);
 
-      double expected = (ratNum.getValue() / ratNumTwo.getValue());
+      RationalNumber ratAns = new RationalNumber(
+        ((first * fourth) - (third * second)),
+        (second * fourth)
+      );
 
-      if (ratNum.divide(ratNumTwo).getValue() != expected) {
-      //  System.out.println(ratNum.divide(ratNumTwo).getValue());
-        //System.out.println(expected);
-    //    testResults[5] = false;
+      if (ratNum.subtract(ratNumTwo).getValue() != ratAns.getValue()) {
+        testResults[5] = false;
         break;
       } else if (i == 99) {
-    //    testResults[5] = true;
+        testResults[5] = true;
       }
     }
+
+    printResults(testResults, "Test subtract");
   }
 
   public static void printResults(boolean[] results, String testName) {

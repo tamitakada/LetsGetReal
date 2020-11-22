@@ -154,12 +154,13 @@ public class RationalNumber extends RealNumber
   public RationalNumber subtract(RationalNumber other){
     reduce();
     other.reduce();
-    int nume = getNumerator() * (other.getDenominator());
-    int deno = getDenominator() * (other.getNumerator());
+    int lc = lcm(getDenominator(), other.getDenominator());
+    int nume = getNumerator() * (lc / getDenominator()) -
+      other.getNumerator() * (lc / (other.getDenominator()));
 
-    RationalNumber quot = new RationalNumber(nume, deno);
-    quot.reduce();
+    RationalNumber diff = new RationalNumber(nume, lc);
+    diff.reduce();
 
-    return quot;
+    return diff;
   }
 }
