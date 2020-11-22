@@ -9,6 +9,7 @@ public class RationalTester {
     testEquals();
     testString();
     testMultiply();
+    testDivide();
   }
 
   public static void testCreationAndGets() {
@@ -169,6 +170,30 @@ public class RationalTester {
     testResults[4] = (one.multiply(two).getValue() == 0);
 
     printResults(testResults, "Test multiply");
+  }
+
+  public static void testDivide() {
+    boolean[] testResults = new boolean[5];
+
+    RationalNumber one = new RationalNumber(0, 1);
+    RationalNumber two = new RationalNumber(1, 0);
+
+    testResults[0] = (one.divide(two).getValue() == 0);
+
+    one = new RationalNumber(5, -2);
+    two = new RationalNumber(4, 10);
+
+    RationalNumber result = one.divide(two);
+    testResults[1] = (result.getValue() == -6.25);
+    testResults[2] = (result.getNumerator() == 25);
+    testResults[3] = (result.getDenominator() == -4);
+
+    one = new RationalNumber(63, 2);
+    two = new RationalNumber(77, 0);
+
+    testResults[4] = (one.divide(two).getValue() == 0);
+
+    printResults(testResults, "Test divide");
   }
 
   public static void printResults(boolean[] results, String testName) {
