@@ -6,6 +6,7 @@ public class RationalTester {
   public static void main(String[] args) {
     testCreationAndGets();
     testReciprocals();
+    testEquals();
   }
 
   public static void testCreationAndGets() {
@@ -71,6 +72,53 @@ public class RationalTester {
     }
 
     printResults(testResults, "Test Reciprocals");
+  }
+
+  public static void testEquals() {
+    boolean[] testResults = new boolean[5];
+
+    RationalNumber one = new RationalNumber(0, 1);
+    RationalNumber two = new RationalNumber(1, 0);
+
+    testResults[0] = one.equals(two);
+
+    one = new RationalNumber(5, -2);
+    two = new RationalNumber(-0, -100);
+
+    testResults[1] = !one.equals(two);
+
+    one = new RationalNumber(8, -4);
+    two = new RationalNumber(8, -4);
+
+    testResults[2] = one.equals(two);
+
+    two = new RationalNumber(4, -2);
+
+    testResults[3] = !one.equals(two);
+
+    for (int i = 0; i < 100; i++) {
+      Random rng = new Random();
+
+      int first = rng.nextInt(10) + 1;
+      int second = rng.nextInt(10) + 1;
+
+      int third = rng.nextInt(10) + 1;
+      int fourth = rng.nextInt(10) + 1;
+
+      RationalNumber ratNum = new RationalNumber(first, second);
+      RationalNumber ratNumTwo = new RationalNumber(third, fourth);
+
+      boolean expected = ((first == third) && (second == fourth));
+
+      if (ratNum.equals(ratNumTwo) != expected) {
+        testResults[4] = false;
+        break;
+      } else if (i == 99) {
+        testResults[4] = true;
+      }
+    }
+
+    printResults(testResults, "Test Equals");
   }
 
   public static void printResults(boolean[] results, String testName) {
