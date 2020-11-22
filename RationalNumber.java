@@ -54,7 +54,9 @@ public class RationalNumber extends RealNumber
   *@return the value expressed as "3/4" or "8/3"
   */
   public String toString(){
-    return "hello";
+    if (getNumerator() == 0) return "" + 0;
+    if (getDenominator() == 1) return "" + getNumerator();
+    return "" + getNumerator() + "/" + getDenominator();
   }
 
   /**Calculate the GCD of two integers.
@@ -64,8 +66,21 @@ public class RationalNumber extends RealNumber
   */
   private static int gcd(int a, int b){
     /*use euclids method or a better one*/
-    http://sites.math.rutgers.edu/~greenfie/gs2004/euclid.html
-    return 0;
+    //http://sites.math.rutgers.edu/~greenfie/gs2004/euclid.html
+    int bigger = a;
+    int smaller = b;
+    if (b > a) {
+      bigger = b;
+      smaller = a;
+    }
+
+    while (Math.abs(bigger) % Math.abs(smaller) != 0) {
+      int oldBigger = bigger;
+      bigger = smaller;
+      smaller = (Math.abs(oldBigger) % Math.abs(smaller));
+    }
+
+    return smaller;
   }
 
   /**

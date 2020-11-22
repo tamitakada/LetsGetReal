@@ -7,6 +7,7 @@ public class RationalTester {
     testCreationAndGets();
     testReciprocals();
     testEquals();
+    testString();
   }
 
   public static void testCreationAndGets() {
@@ -119,6 +120,30 @@ public class RationalTester {
     }
 
     printResults(testResults, "Test Equals");
+  }
+
+  public static void testString() {
+    boolean[] testResults = new boolean[6];
+
+    RationalNumber one = new RationalNumber(0, 1);
+    RationalNumber two = new RationalNumber(1, 0);
+
+    testResults[0] = one.toString().equals("0");
+    testResults[1] = two.toString().equals("0");
+
+    one = new RationalNumber(5, -2);
+    two = new RationalNumber(-0, -100);
+
+    testResults[2] = one.toString().equals("5/-2");
+    testResults[3] = two.toString().equals("0");
+
+    one = new RationalNumber(-99, 1);
+    two = new RationalNumber(4, 3);
+
+    testResults[4] = one.toString().equals("-99");
+    testResults[5] = two.toString().equals("4/3");
+
+    printResults(testResults, "Test toString");
   }
 
   public static void printResults(boolean[] results, String testName) {
