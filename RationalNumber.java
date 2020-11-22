@@ -85,6 +85,11 @@ public class RationalNumber extends RealNumber
     return smaller;
   }
 
+  private static int lcm(int a, int b) {
+    int gcf = gcd(a, b);
+    return (gcf * (a / gcf) * (b / gcf));
+  }
+
   /**
   *Divide the numerator and denominator by the GCD
   *This must be used to maintain that all RationalNumbers are
@@ -132,12 +137,29 @@ public class RationalNumber extends RealNumber
   *Return a new RationalNumber that is the sum of this and the other
   */
   public RationalNumber add(RationalNumber other){
-    return null;
+    reduce();
+    other.reduce();
+    int lc = lcm(getDenominator(), other.getDenominator());
+    int nume = getNumerator() * (lc / getDenominator()) +
+      other.getNumerator() * (lc / (other.getDenominator()));
+
+    RationalNumber sum = new RationalNumber(nume, lc);
+    sum.reduce();
+
+    return sum;
   }
   /**
   *Return a new RationalNumber that this minus the other
   */
   public RationalNumber subtract(RationalNumber other){
-    return null;
+    reduce();
+    other.reduce();
+    int nume = getNumerator() * (other.getDenominator());
+    int deno = getDenominator() * (other.getNumerator());
+
+    RationalNumber quot = new RationalNumber(nume, deno);
+    quot.reduce();
+
+    return quot;
   }
 }
