@@ -9,10 +9,11 @@ public class RealTester {
     testMultiply();
     testDivide();
     testSubtract();
+    testCompare();
   }
 
   public static void testEquals() {
-    boolean[] testResults = new boolean[6];
+    boolean[] testResults = new boolean[7];
 
     RealNumber one = new RealNumber(0);
     RealNumber two = new RealNumber(0);
@@ -43,6 +44,11 @@ public class RealTester {
     two = new RealNumber(-7823.00000000000001);
 
     testResults[5] = one.equals(two);
+
+    one = new RationalNumber(4, 10);
+    two = new RealNumber(0.4);
+
+    testResults[6] = one.equals(two);
 
     printResults(testResults, "Test Equals");
   }
@@ -200,6 +206,48 @@ public class RealTester {
     }
 
     printResults(testResults, "Test Subtract");
+  }
+
+  public static void testCompare() {
+    boolean[] results = new boolean[4];
+
+    RealNumber one = new RealNumber(0);
+    RealNumber two = new RationalNumber(1, 0);
+
+    results[0] = (one.compareTo(two) == 0);
+
+    one = new RealNumber(-123929.123123);
+    two = new RealNumber(883);
+
+    results[1] = (one.compareTo(two) < 0);
+
+    one = new RationalNumber(90, 23);
+    two = new RealNumber(2.11);
+
+    results[2] = (one.compareTo(two) > 0);
+
+    results[3] = true;
+
+    for (int i = 0; i < 100; i++) {
+      Random rng = new Random();
+      double num = rng.nextDouble();
+      double numTwo = rng.nextDouble();
+
+      RealNumber testOne = new RealNumber(num);
+      RealNumber testTwo = new RealNumber(numTwo);
+
+      int expected = 1;
+
+      if (num == numTwo) expected = 0;
+      else if (num < numTwo) expected = -1;
+
+      if (testOne.compareTo(testTwo) != expected) {
+        results[3] = false;
+        break;
+      }
+    }
+
+    printResults(results, "Test compare");
   }
 
   public static void printResults(boolean[] results, String testName) {
