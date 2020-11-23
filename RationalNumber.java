@@ -54,8 +54,14 @@ public class RationalNumber extends RealNumber
   *@return the value expressed as "3/4" or "8/3"
   */
   public String toString(){
-    if (getNumerator() == 0) return "" + 0;
-    if (getDenominator() == 1) return "" + getNumerator();
+    int nume = getNumerator();
+    int deno = getDenominator();
+
+    if (nume == 0) return "" + 0;
+    if (deno == 1) return "" + nume;
+    if ((nume < 0) && (deno < 0)) {
+      return ("" + Math.abs(nume) + "/" + Math.abs(deno));
+    }
     return "" + getNumerator() + "/" + getDenominator();
   }
 

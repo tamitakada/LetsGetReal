@@ -127,7 +127,7 @@ public class RationalTester {
   }
 
   public static void testString() {
-    boolean[] testResults = new boolean[6];
+    boolean[] testResults = new boolean[7];
 
     RationalNumber one = new RationalNumber(0, 1);
     RationalNumber two = new RationalNumber(1, 0);
@@ -146,6 +146,10 @@ public class RationalTester {
 
     testResults[4] = one.toString().equals("-99");
     testResults[5] = two.toString().equals("4/3");
+
+    one = new RationalNumber(-100, -33);
+
+    testResults[6] = one.toString().equals("100/33");
 
     printResults(testResults, "Test toString");
   }
