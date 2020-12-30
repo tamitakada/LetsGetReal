@@ -15,7 +15,7 @@ public class RationalTester {
   }
 
   public static void testCreationAndGets() {
-    boolean[] testResults = new boolean[12];
+    boolean[] testResults = new boolean[16];
 
     RationalNumber one = new RationalNumber(0, 1);
     RationalNumber two = new RationalNumber(1, 0);
@@ -40,6 +40,15 @@ public class RationalTester {
 
     testResults[10] = (two.getNumerator() == 0);
     testResults[11] = (two.getDenominator() == -100);
+
+    one = new RationalNumber(325, 455);
+    two = new RationalNumber(21, -7);
+
+    testResults[12] = (one.getNumerator() == 5);
+    testResults[13] = (one.getDenominator() == 7);
+
+    testResults[14] = (two.getNumerator() == -3);
+    testResults[15] = (two.getDenominator() == 1);
 
     printResults(testResults, "Test Creation & Gets");
   }
@@ -147,9 +156,9 @@ public class RationalTester {
     testResults[4] = one.toString().equals("-99");
     testResults[5] = two.toString().equals("4/3");
 
-    one = new RationalNumber(-100, -33);
+    one = new RationalNumber(-100, -55);
 
-    testResults[6] = one.toString().equals("100/33");
+    testResults[6] = one.toString().equals("20/11");
 
     printResults(testResults, "Test toString");
   }

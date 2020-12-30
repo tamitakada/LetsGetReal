@@ -16,6 +16,7 @@ public class RationalNumber extends RealNumber
       numerator = nume;
       denominator = deno;
     }
+    reduce();
   }
 
   public double getValue(){
@@ -113,13 +114,10 @@ public class RationalNumber extends RealNumber
   *Return a new RationalNumber that is the product of this and the other
   */
   public RationalNumber multiply(RationalNumber other){
-    reduce();
-    other.reduce();
     int nume = getNumerator() * (other.getNumerator());
     int deno = getDenominator() * (other.getDenominator());
 
     RationalNumber product = new RationalNumber(nume, deno);
-    product.reduce();
 
     return product;
   }
@@ -128,13 +126,10 @@ public class RationalNumber extends RealNumber
   *Return a new RationalNumber that is the this divided by the other
   */
   public RationalNumber divide(RationalNumber other){
-    reduce();
-    other.reduce();
     int nume = getNumerator() * (other.getDenominator());
     int deno = getDenominator() * (other.getNumerator());
 
     RationalNumber quot = new RationalNumber(nume, deno);
-    quot.reduce();
 
     return quot;
   }
@@ -143,14 +138,11 @@ public class RationalNumber extends RealNumber
   *Return a new RationalNumber that is the sum of this and the other
   */
   public RationalNumber add(RationalNumber other){
-    reduce();
-    other.reduce();
     int lc = lcm(getDenominator(), other.getDenominator());
     int nume = getNumerator() * (lc / getDenominator()) +
       other.getNumerator() * (lc / (other.getDenominator()));
 
     RationalNumber sum = new RationalNumber(nume, lc);
-    sum.reduce();
 
     return sum;
   }
@@ -158,14 +150,11 @@ public class RationalNumber extends RealNumber
   *Return a new RationalNumber that this minus the other
   */
   public RationalNumber subtract(RationalNumber other){
-    reduce();
-    other.reduce();
     int lc = lcm(getDenominator(), other.getDenominator());
     int nume = getNumerator() * (lc / getDenominator()) -
       other.getNumerator() * (lc / (other.getDenominator()));
 
     RationalNumber diff = new RationalNumber(nume, lc);
-    diff.reduce();
 
     return diff;
   }
